@@ -50,9 +50,9 @@ app.whenReady().then(() => {
         } else {
             const tokenData = JSON.parse(data);
             if (tokenData.token) {
-                createWindow('app.html'); // Ana uygulama ekranı
+                createWindow('index.html'); // Ana uygulama ekranı
             } else {
-                createWindow('index.html');
+                createWindow('app.html');
             }
         }
     });
@@ -62,11 +62,11 @@ app.whenReady().then(() => {
         console.log('Login attempt:', username);
 
         try {
-            const response = await axios.post('https://www.pelikedu.com/api/development/login', 
+            const response = await axios.post('https://www.pelikedu.com/api/v1/login', 
                 { username, password },
                 {
                     headers: {
-                        'x-api-key': '1234', 
+                        'x-api-key': '2eUYM4R1Kqhjw3d875e14', 
                         'Content-Type': 'application/json'
                     }
                 }
@@ -84,7 +84,7 @@ app.whenReady().then(() => {
                     }
                     console.log('Login successful');
                     event.reply('login-success');
-                    mainWindow.loadFile('app.html');
+                    mainWindow.loadFile('ders-listesi.html');
                 });
             } else {
                 console.log('Login failed: invalid credentials');

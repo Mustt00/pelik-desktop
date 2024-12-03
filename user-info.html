@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kullanıcı Profili</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fb;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 40px auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .profile-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-details {
+            max-width: 500px;
+            text-align: left;
+        }
+
+        .profile-details h1 {
+            font-size: 2rem;
+            margin: 0;
+            color: #333;
+        }
+
+        .profile-details p {
+            font-size: 1rem;
+            color: #555;
+            margin: 10px 0;
+        }
+
+        .profile-details .label {
+            font-weight: bold;
+            color: #2d3e50;
+        }
+
+        .user-info {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .user-info div {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .user-info div:last-child {
+            margin-right: 0;
+        }
+
+        .user-info .info-box {
+            background-color: #eff3f7;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.5s ease;
+        }
+
+        .user-info .info-box:hover {
+            transform: scale(1.05);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                padding: 20px;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-pic {
+                margin: 0 0 20px 0;
+            }
+
+            .user-info {
+                flex-direction: column;
+            }
+
+            .user-info div {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .user-info div:last-child {
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="profile-header">
+            <img src="https://www.pelikedu.com/store/1030/avatar/65f0157c5ac72.png" alt="Profil Resmi"
+                class="profile-pic">
+            <div class="profile-details">
+                <h1 id="username">Yükleniyor...</h1>
+                <p><span class="label">E-posta:</span> <span id="email">Yükleniyor...</span></p>
+                <p><span class="label">Telefon:</span> <span id="phone">Yükleniyor...</span></p>
+                <p><span class="label">Hakkında:</span> <span id="about">Yükleniyor...</span></p>
+            </div>
+        </div>
+
+        <div class="user-info">
+            <div>
+                <div class="info-box">
+                    <h3>Görevler</h3>
+                    <p id="tasks">Yükleniyor...</p>
+                </div>
+            </div>
+            <div>
+                <div class="info-box">
+                    <h3>Arkadaşlar</h3>
+                    <p id="friends">Yükleniyor...</p>
+                </div>
+            </div>
+            <div>
+                <div class="info-box">
+                    <h3>Hedefler</h3>
+                    <p id="goals">Yükleniyor...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2024, <a href="#">Pelikedu</a> - Tüm hakları saklıdır.</p>
+        </div>
+    </div>
+
+    <script>
+        // API endpoint'ine istek gönderme
+        fetch('https://www.pelikedu.com/api/v1/panel/profile-setting', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer 2eUYM4R1Kqhjw3d875e14'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); // API'den gelen veriyi kontrol edin
+                document.getElementById('username').innerText = data.username || 'Yüklenmedi';
+                document.getElementById('email').innerText = data.username || 'Yüklenmedi';
+                document.getElementById('phone').innerText = data.email || 'Yüklenmedi';
+                document.getElementById('about').innerText = data.phone || 'Yüklenmedi';
+            })
+            .catch(error => {
+                console.error('API isteği sırasında bir hata oluştu:', error);
+                alert('Veriler yüklenemedi!');
+            });
+    </script>
+
+</body>
+
+</html>

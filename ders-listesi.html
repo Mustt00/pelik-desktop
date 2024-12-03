@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="utf-8">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="kk3jf1Z5eRj4KaiGP8qXm8OWc4Imf00WAr7v0TYf">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name='robots' content="NOODP, nofollow, noindex">
+    <link rel='shortcut icon' type='image/x-icon'
+        href="https://www.pelikedu.com/store/1026/PELİK KALEM vectorized.png">
+    <link rel="manifest" href="/mix-manifest.json?v=4">
+    <meta name="theme-color" content="#FFF">
+    <!-- Windows Phone -->
+    <meta name="msapplication-starturl" content="/">
+    <meta name="msapplication-TileColor" content="#FFF">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-title" content="PELİK">
+    <link rel="apple-touch-icon" href="https://www.pelikedu.com/store/1026/PELİK KALEM vectorized.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <!-- Android -->
+    <link rel='icon' href='https://www.pelikedu.com/store/1026/PELİK KALEM vectorized.png'>
+    <meta name="application-name" content="PELİK">
+    <meta name="mobile-web-app-capable" content="yes">
+    <!-- Other -->
+    <meta name="layoutmode" content="fitscreen/standard">
+    <link rel="home" href="https://www.pelikedu.com">
+    <!-- Open Graph -->
+    <meta property='og:title' content='Kütüphanem'>
+    <meta name='twitter:card' content='summary'>
+    <meta name='twitter:title' content='Kütüphanem'>
+    <meta property='og:site_name' content='https://www.pelikedu.com/PELİK'>
+    <meta property='og:image' content='https://www.pelikedu.com/store/1026/PELİK KALEM vectorized.png'>
+    <meta name='twitter:image' content='https://www.pelikedu.com/store/1026/PELİK KALEM vectorized.png'>
+    <meta property='og:locale' content='https://www.pelikedu.com/en_US'>
+    <meta property='og:type' content='website'>
+    <meta name="google-site-verification" content="lPe2L1KuXt8IrWNVN1XPfYFT79KeGYniI3FEfUbzJQI" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KLG6Y7FMFQ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-KLG6Y7FMFQ');
+    </script>
+    <title>Derslerim | PELİK</title>
+    <!-- General CSS File -->
+    <link href="https://cdn.pelikedu.com/assets/default/css/font.css?v=1731336059" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/default/vendors/sweetalert2/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="/assets/default/vendors/toast/jquery.toast.min.css">
+    <link rel="stylesheet" href="/assets/default/vendors/simplebar/simplebar.css">
+    <link rel="stylesheet" href="https://cdn.pelikedu.com/assets/default/css/app.css?v=1731336059">
+    <link rel="stylesheet" href="https://cdn.pelikedu.com/assets/default/css/panel.css?v=1731336059">
+    <style>
+        .webinar-card-body {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .webinar-title {
+            color: rgb(0, 0, 0);
+        }
+
+        .badge {
+            font-size: 12px;
+            padding: 5px;
+            border-radius: 3px;
+        }
+
+        .badge-primary {
+            background-color: blue;
+            color: white;
+        }
+
+        .badge-warning {
+            background-color: orange;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="dersler-container">
+        <!-- Dinamik dersler buraya eklenecek -->
+    </div>
+    <script>
+        // API'den veri çekme ve dersleri ekleme
+        fetch('https://www.pelikedu.com/api/v1/panel/webinars/purchases', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE3MzIwOTY4NTcsIm5iZiI6MTczMjA5Njg1NywianRpIjoiN3ZjMnVPZVFMTUNmSk9mMyIsInN1YiI6MTAyOSwicHJ2IjoiNDBhOTdmY2EyZDQyNGU3NzhhMDdhMGEyZjEyZGM1MTdhODVjYmRjMSJ9.zA11tunXYWnElYEJIjR34-vTS6GL3UPCFXLnzX3KOa4',
+                'x-api-key': '2eUYM4R1Kqhjw3d875e14',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);  // API yanıtını konsola yazdırın
+                const webinars = data.data ? data.data.webinars || [] : [];  // Eğer 'data' varsa ve 'webinars' varsa al, yoksa boş dizi
+                if (webinars.length > 0) {
+                    const derslerContainer = document.getElementById('dersler-container');
+                    webinars.forEach(ders => {
+                        const dersHTML = `
+                    <div class="webinar-card-body" style="border-radius: 15px; border: 2px solid #ddd; padding: 15px; margin-bottom: 15px; margin-left: 15px; margin-right: 15px; display: flex; align-items: flex-start; justify-content: space-between; font-family: Arial, sans-serif;">                    <!-- Ders Resmi (Genişletilmiş) -->
+                    <div class="webinar-image" style="flex-shrink: 0; width: 180px; height: 100%; margin-right: 0; margin-left: 0;">
+                        <img src="${ders.image}" alt="${ders.title}" class="img-fluid" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px;">
+                    </div>
+                    <div class="webinar-details ml-3" style="flex-grow: 1;">
+                        <a href="${ders.link}">
+                            <h3 class="webinar-title font-weight-bold font-16" style="margin-bottom: 5px; display: inline-block;">
+                                ${ders.title}
+                            </h3>
+                        </a>
+                        <span class="badge badge-outlined-warning ml-10" style="font-size: 12px; margin-left: 10px; display: inline-block;">
+                            Son Kullanma Tarihi: ${ders.expire_on ? new Date(ders.expire_on * 1000).toLocaleDateString() : 'Belirtilmemiş'}
+                        </span>
+                        <div class="webinar-price mt-2" style="color: #32CD32; font-size: 18px; font-weight: bold;">
+                            ₺ ${ders.price}
+                        </div>
+                        <div class="webinar-info" style="border-radius: 15px; padding: 15px; font-size: 12px; margin-top: 60px; margin-bottom: -15px; font-family: Arial, sans-serif;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <div style="width: 22%; ">Ders ID:</div>
+                        <div style="width: 22%; ">Kategori:</div>
+                        <div style="width: 22%; ">Eğitmen:</div>
+                        <div style="width: 22%; ">Satın Alma Tarihi:</div>
+                    </div>
+                        <div style="display: flex; justify-content: space-between;">
+                        <div style="width: 22%; font-weight: bold;">${ders.id}</div>
+                        <div style="width: 22%; font-weight: bold;">${ders.category}</div>
+                        <div style="width: 22%; font-weight: bold;">${ders.teacher.full_name}</div>
+                        <div style="width: 22%; font-weight: bold;">${new Date(ders.purchased_at * 1000).toLocaleDateString()}</div>
+                    </div>
+                `;
+                        derslerContainer.insertAdjacentHTML('beforeend', dersHTML);
+                    });
+                } else {
+                    console.error('API yanıtında "webinars" verisi bulunamadı.');
+                }
+            })
+            .catch(error => console.error('Hata:', error));
+    </script>
+</body>
+
+</html>
